@@ -68,60 +68,72 @@
     
     <script>
 	
-		let targetNumber = 0;	//this global variable will store the target number to be guessed in the Hi-Low Game
+		let targetNumber=0;	//this global variable will store the target number to be guessed in the Hi-Low Game
 		
 		//1. Create an array called numberRanges for the following numbers 5,10,20
-		var numberToGuess = Math.floor((Math.random()*10)+1); 
-		console.log(numberToGuess);
-		var guessNum = 0;
+		var randomNumber = Math.floor((Math.random()*10)+1); 
+		console.log(randomNumber)
 		
-		function highLowGame(){
+		var numberRanges = [5, 10, 20];
+		//2. Use the numberRanges array to populate the topNumber dropdown list
+		
+		function numberRanges(topNumber) {
+		var dropdown = document.getElementById("numberRanges");
+		
+		for (var i = 0; i < numberRanges.length; ++i) {
+    // Append the element to the end of Array list
+    dropdown[topNumber.length] = new Option(numberToGuess[i], numberToGuess[i]);
+	}
+	}
+		
+		function getTargetNumber() {
+			//3. The onChange event handler fires it will call this function. Get the selected value from the list using document.querySelector()
+				document.jquerySelector();
+			//4. Call the randomNumber function and pass it the chosen number as a parameter. Capture the retun value in targetNumber	
+				function randomNumber(){
+					return targetNumber;
+				}
+		}//end getTargetNumber()
+	
+	
+		function hiLowGame()	{
+			//alert("inside redGreenGame()");	
 			
-			var inValue = parseInt( document.getElementById("inputGuess").value );	
+			let inNumb = document.querySelector("#inputNumber").value;
 			
-			if (inValue == numberToGuess)
+			if( inNumb == targetNumber )		//5. There is a problem with the if statement
 			{
-				document.getElementById("highLowResult").innerHTML = "Correct";
-				document.getElementById("highLowResult").style.backgroundColor = "lightblue";
+				document.getElementById("outResults").innerHTML = "Corret";//6. display CORRECT!!!	
 			}
 			else
 			{
-				//Your code goes here!	
-				if (inValue > numberToGuess){
-					document.getElementById("highLowResult").innerHTML = "High";
-					document.getElementById("highLowResult").style.backgroundColor = "white";
+				if( inNumb < targetNumber)
+				{
+					document.getElementsById("outResults").innerHTML = "HIGHER";//7. display HIGHER!	
 				}
-				else{
-					document.getElementById("highLowResult").innerHTML = "Low";
-					document.getElementById("highLowResult").style.backgroundColor = "white";
-				}	
+				else
+				{
+					document.getElementById("outResults").innerHTML = "LOWER";//8. display LOWER	
+				}
 			}
-			guessNum++;
-			
-			if(guessNum > 10){
-				document.getElementById("guessesNum").innerHTML = guessNum;
-				document.getElementById("guessesNum").style.backgroundColor = "pink";
-			}
-			else{
-				document.getElementById("guessesNum").innerHTML = guessNum;
-			}
-			
-			
+		
+		}//end hiLowGame()
+		
+		function randomNumber(inTopNum) {
+			return Math.floor(Math.random()* inTopNum) + 1;	//random number from 1 to inTopNum	
 		}
 	
-		
-		
-		function resetHighLowGame(){
-			document.getElementById("highLowForm").reset();
-			document.getElementById("highLowResult").innerHTML = "";
-			document.getElementById("guessesNum").innerHTML = "";
-			document.getElementById("highLowResult").style.backgroundColor = "white"; 
-			document.getElementById("guessesNum").style.backgroundColor = "white";
-			guessNum = 0;
+		function hiLowRest(){
+			document.getElementById("hiLow").reset();
+			
+			document.getElementById("outResults").innerHTML = "";
+			
 			numberToGuess = Math.floor((Math.random()*10)+1); 
 		}
-
-	
+			
+			
+		
+		
 	</script>
 
 </head>
@@ -157,7 +169,7 @@
         	<label for="topNumber">Choose: </label>
             <select id="topNumber" onChange="getTargetNumber()">
             	<option value="">Choose a number</option>
-								<option>5</option>
+                <option>5</option>
 								<option>10</option>
 								<option>20</option>
             </select>
@@ -171,26 +183,24 @@
         <h3>Playing the &quot;Hi-Lo&quot; game.</h3>
 		<p>Use the following form to play the game.</p> 
         
-        <form name="highLowForm" id="highLowForm" method="post" action="">
+        <form name="hiLow" id="hiLow" method="post" action="">
         
         	<p>
         	<label for="inputNumber">Your guess: </label>
-            <input type="text" name="inputGuess" id="inputGuess">
+            <input id="inputNumber" name="inputNumber">
         	<p>
             
-						
-						
             <p>
-            <input type="button" name= "makeGuess" id="makeGuess" value="Guess?">
-            <input type="reset" name="resetHighLowGame" id="resetHighLowGame" value="Reset">
-            <span id="highLowResult"></span> <!-- results go here -->
+            <input type="button" name="guess" id="guess" value="Guess?" onClick="hiLowGame()">
+            <input type="reset" name="restHiLow" id="restHiLow" value="Reset">
+            <span id="outResults"></span> <!-- results go here -->
             </p>
 						
 						<script>
-							document.getElementById("makeGuess").addEventListener("click",highLowGame);	//assign click event to form button	
-							document.getElementById("resetHighLowGame").addEventListener("click",resetHighLowGame);	
-				     </script>
-
+							document.getElementById("guess").addEventListener("click",hiLowGame);	//assign click event to form button	
+							document.getElementById("restHiLow").addEventListener("click",hiLowRest);	
+				    </script>
+						
         </form>
 
 		<p>Some script is already provided for you. Your assignment is to finish the game. You are welcome to add or modify as needed to complete the assignment. </p>
