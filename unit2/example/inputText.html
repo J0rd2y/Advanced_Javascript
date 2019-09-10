@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script>
+  
+  $(document).ready(
+    
+    function(){ 
+  
+      //alert("Jquery Working");
+  
+      $("body").css("background-color", "yellow");
+      
+      $("p").css("font-size", "30px");
+      
+      //Differnet type of button onClick
+      //$("[type=submit]").click(function(){
+      //alert("clicked the button");
+ 
+      $("#button").click(function(e){
+        //console.log(e);
+        //alert("button work");
+        
+        let inName = $("#inputName").val();
+        
+        //alert("input value" + inName);
+        
+        $("span").html(inName);
+  
+        //A shorter/faster way putting line 27 and 31 together
+        //$("span").html( $("#inputName").val() );
+        
+        
+  
+  });
+  
+  $("#button2").click(function(e) {
+    
+    $("span").html("");
+    
+  });
+  
+  }); 
+  
+  
+  
+  </script>
+  
+<title>Jquery Input Prcoessing</title>
+</head>
+
+<body>
+<p>WDV321 Advanced Javascript</p>
+<p>Input Processing </p>
+<form name="form1" method="post" action="">
+  <p>Name: 
+    <label for="inputName"></label>
+  <input type="text" name="inputName" id="inputName">
+  </p>
+  <p>
+    <input type="button" name="button" id="button" value="Submit">
+    <input type="reset" name="button2" id="button2" value="Reset">
+  </p>
+</form>
+<p>You Entered: <span></span></p>
+<p>&nbsp;</p>
+</body>
+</html>
