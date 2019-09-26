@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<title>WDV321 Advanced Javascript - Form Validation Project</title>
+
+<style>
+
+label	{
+	width:150px;
+	display:inline-block;	
+}
+
+</style>
+
+<script>
+
+$(document).ready(function(){
+	
+	$("#form1").click(function(){
+		var validForm=true;	
+		
+		if(  $("#custName").val()   )
+		{
+			$("#custNameError").html("");				
+		}
+		else
+		{
+			$("#custNameError").html("Please enter your name.");
+			validForm = false;	
+		}
+		
+		var inPhone = $("#custPhone").val();	
+		$("#custPhoneError").html("");			
+		if( !inPhone )
+		{
+			$("#custPhoneError").html("Please enter your phone number.");
+			validForm = false;					
+		}
+		else
+		{
+			
+			if( !$.isNumeric(inPhone) || (inPhone % 1 != 0)  )				
+			{
+				$("#custPhoneError").html("Phone number must be a number.");
+				validForm = false;	
+			}	
+			else
+			{
+				if(inPhone.length != 10)
+				{	
+					$("#custPhoneError").html("Phone number must have 10 numbers");
+					validForm = false;						
+				}
+				
+				function validateForm() {
+    	var radio = document.getElementsByName("custProducts");
+    	var formValid = false;
+
+    	var i = 0;
+    	while (!formValid && i < radio.length) {
+        if (radio[i].checked) formValid = true;
+        i++;        
+    	}
+
+    	if (!formValid) alert("Must check some option!");
+    	return formValid;
+				}
+			}
+		}
+	});
+});
+		
+	
+	
+	
+
+	
+</script>
+
+</head>
+
+
+<body>
+
+	<h2>WDV321 Advanced Javascript </h2>
+	<h3>Form Validation Project - Complaint Form</h3>
+	<form id="form1" name="form1" method="post" action="">
+	  <p>Please enter the following information in order to process your concerns.</p>
+	  <p> 
+	    <label for="custName">Name:</label>
+	  	<input type="text" name="custName" id="custName" />
+			<span id="custNameError" class="errorMsg"></span>
+	  </p>
+	  <p>
+	    <label for="custPhone">Phone Number: </label>
+	    <input type="text" name="custPhone" id="custPhone" />
+			<span id="custPhoneError" class="errorMsg"></span>
+	  </p>
+	  <p>Please Select Product Group:</p>
+	  <p>
+	    <label>
+	      <input type="radio" name="custProducts" value="books" id="custProducts_0" />
+	      Books</label>
+	    <br />
+	    <label>
+	      <input type="radio" name="custProducts" value="movies" id="custProducts_1" />
+	      Movies</label>
+	    <br />
+	    <label>
+	      <input type="radio" name="custProducts" value="electronics" id="custProducts_2" />
+	      Consumer Electronics</label>
+	    <br />
+	    <label>
+	      <input type="radio" name="custProducts" value="computer" id="custProducts_3" />
+	      Computer</label>
+	    <br />
+	  </p>
+	  <p>Description of problem:	(Limit 200 characters)</p>
+	  <p>
+  <label for="custComplaint"></label>
+	    <textarea name="custComplaint" id="custComplaint" cols="45" rows="5"></textarea>
+      </p>
+	  <p>
+	    <input type="submit" name="button" id="form1" value="File Complaint" />
+	    <input type="reset" name="button2" id="button2" value="Reset" />
+	  </p>
+</form>
+	<p>&nbsp;</p>
+</body>
+</html>
