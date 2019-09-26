@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <title>Use Regular Expressions</title>
+    <script>
+    
+    $(document).ready(function(){
+      
+      $("#sendForm").click(function(){
+        var validForm=true;	
+        
+        if(  $("#custName").val()   )
+        {
+          $("#custNameError").html("");				
+        }
+        else
+        {
+          $("#custNameError").html("Please enter your email.");
+          validForm = false;	
+        }
+        
+        var inPhone = $("#custPhone").val();	
+        $("#custPhoneError").html("");			
+        if( !inPhone )
+        {
+          $("#custPhoneError").html("Please enter your phone number.");
+          validForm = false;					
+        }
+        else
+        {
+          
+          if( !$.isNumeric(inPhone) || (inPhone % 1 != 0)  )				
+          {
+            $("#custPhoneError").html("Phone number must be a number.");
+            validForm = false;	
+          }	
+          else
+          {
+            if(inPhone.length != 10)
+            {	
+              $("#custPhoneError").html("Phone number must have 10 numbers");
+              validForm = false;						
+            }
+          }
+        }
+        
+        if(validForm)
+        {
+          alert("Valid form will be submitted");	
+        }
+        else
+        {
+          alert("Error Message has occurred, please enter in your information in the boxe's");
+        }
+        
+      }); 
+      
+    });
+      
+    </script>
+  </head>
+  <body>
+    <h2>WDV321 Advanced Javascript </h2>
+  	<h3>Form Validation - JQuery Coding Example</h3>
+  	<form id="emailForm" name="emailForm" method="post" action="">
+  	  <p>Please enter the following information</p>
+  	  <p> 
+  	    <label for="custName">Email:</label>
+  	  	<input type="text" name="custName" id="custName" />
+          <span id="custNameError" class="errorMsg"></span>
+  	  </p>
+  	  <p> 
+  	    <label for="custPhone">Phone Number:</label>
+  	    <input type="text" name="custPhone" id="custPhone" />
+          <span id="custPhoneError" class="errorMsg"></span>
+  	    <span style="font-size:small"><em>(999-999-9999)</em></span>
+        </p>
+  	  <p>
+  	    <input type="button" name="button" id="sendForm" value="Apply Now" />
+  	    <input type="reset" name="button2" id="button2" value="Reset" />
+  	  </p>
+    </form>
+  </body>
+</html>

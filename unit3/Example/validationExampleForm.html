@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>WDV321 Advanced Javascript - Form Validation JQuery Example</title>
+
+<style>
+
+label	{
+	width:150px;
+	display:inline-block;	
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
+
+
+
+<script>
+
+$(document).ready(function(){
+	
+	$("#sendForm").click(function(){
+		var validForm=true;	//set valid flag to true, assume form is valid
+		
+		//validate customer name field.  Field is required
+		if(  $("#custName").val()   )
+		{
+			$("#custNameError").html("");		//field value is good, remove any error messages		
+		}
+		else
+		{
+			$("#custNameError").html("Please enter your name.");
+			validForm = false;	
+		}
+	
+		//validate customer phone number.  Field is required, must be numeric, must be 10 characters
+		var inPhone = $("#custPhone").val();	//get the input value of the Phone field
+		$("#custPhoneError").html("");			//set error message back to empty, assume field is valid	
+		if( !inPhone )
+		{
+			$("#custPhoneError").html("Please enter your phone number.");
+			validForm = false;					
+		}
+		else
+		{
+			//if( !$.isNumeric(inPhone) || Math.round(inPhone) != inPhone )	//if the value is NOT numerice OR not an integer.	Rounding technique
+			if( !$.isNumeric(inPhone) || (inPhone % 1 != 0)  )				//if the value is NOT numerice OR not an integer.	Modulus technique			
+			{
+				$("#custPhoneError").html("Phone number must be a number.");
+				validForm = false;	
+			}	
+			else
+			{
+				if(inPhone.length != 10)
+				{	
+					$("#custPhoneError").html("Phone number must have 10 numbers");
+					validForm = false;						
+				}
+			}
+		}
+		
+		//ALL VALIDATIONS ARE COMPLETE.  If all of the fields are valid we can submit the form.  Otherwise display the errors
+		if(validForm)
+		{
+			//all values are valid, form is good, submit the form
+			alert("Valid form will be submitted");	
+			//$("#applicationForm").submit();		//SUBMIT the form to the server
+		}
+		else
+		{
+			//form has at least one invalid field
+			//display form and associated error messages
+			alert("Invalid form. Display form and error messages");
+
+		}
+		
+	}); //end sendform.click
+	
+	
+	
+});	//end .ready	
+
+
+</script>
+</head>
+
+
+<body>
+
+	<h2>WDV321 Advanced Javascript </h2>
+	<h3>Form Validation - JQuery Coding Example</h3>
+	<form id="applicationForm" name="applicationForm" method="post" action="">
+	  <p>Please enter the following information in order to process your Application</p>
+	  <p>&nbsp;</p>
+	  <p> 
+	    <label for="custName">Name:</label>
+	  	<input type="text" name="custName" id="custName" />
+        <span id="custNameError" class="errorMsg"></span>
+	  </p>
+	  <p> 
+	    <label for="custPhone">Phone Number:</label>
+	    <input type="text" name="custPhone" id="custPhone" />
+        <span id="custPhoneError" class="errorMsg"></span>
+	    <span style="font-size:small"><em>(9999999999)</em></span>
+      </p>
+	  <p>
+	    <input type="button" name="button" id="sendForm" value="Apply Now" />
+	    <input type="reset" name="button2" id="button2" value="Reset" />
+	  </p>
+</form>
+	<p>This page uses JQuery and Javascript to validate the form fields. The validation process will validate each field every time the form is submitted. </p>
+	<p>The validation enforces the following rules for the Phone Number field: Required Value, Must Be Numeric and Must have 10 characters.</p>
+	<p>When checking to see if the value that was entered is Numeric we have to account for decimal values such as 12345.6789. There are two techniques in the codes for validating that the Phone Number field is only integers. One technique rounds the value to the nearest whole number and then compares the modified value to the original value. Example Math.round(inPhone) == inPhone.  If they are the same then the value is an integer if not there are problems.</p>
+	<p>The other technique uses the Modulus operation % to see if the remainder is zero. Example inPhone % 1 == 0. If the remainder is 0 the value is an integer. If not the value is not an integer and not allowed.</p>
+</body>
+</html>
