@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+function change(arr) {
+var el = document.getElementById('sel');
+el.options.length = 0;
+for(var i = 0; i< arr.length; i++ ) {
+el.options[el.options.length] = new Option( arr[i], arr[i]);
+}
+}
+</script>
+
+<input type="radio" name="rad" id="r0" onclick='change(["f1", "x2", "i3"]) '><label for="r0"> one </label><br>
+<input type="radio" name="rad" id="r1" onclick='change(["m1", "r4", "g3"]) '><label for="r1">two </label><br>
+
+<select id="sel"></select>
+  </body>
+</html>
